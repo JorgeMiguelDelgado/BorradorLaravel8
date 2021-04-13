@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreCurso extends FormRequest
 {
@@ -30,4 +31,11 @@ class StoreCurso extends FormRequest
             'amount'    =>  'required',
         ];
     }
+
+    protected function prepareForValidation()
+{
+    $this->merge([
+        'slug' => Str::slug($this->name),
+    ]);
+}
 }
